@@ -82,7 +82,31 @@ public class CommonUtils {
 			out.close();
 		}
 	}
-
+	
+	/**
+	 * 读取文件内容，编码可指定
+	 * @param fileName
+	 * @param encoding
+	 * @return
+	 * @throws IOException
+	 */
+	public static String readFile(String fileName,String encoding) throws IOException {
+		if (fileName != null) {
+			File file = new File(fileName);
+			if(file.exists()){
+				InputStream fileReader1=new FileInputStream(file);
+				BufferedReader buffer1=new BufferedReader(new InputStreamReader(fileReader1,encoding));
+				String str = null;
+				StringBuffer strBuff = new StringBuffer();
+				while((str = buffer1.readLine() ) != null){
+					strBuff.append(str);
+				}
+				return strBuff.toString();
+			}
+				
+		}
+		return null;
+	}
 	public static String formatDate(Timestamp date) {
 		java.text.Format format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(date);
